@@ -14,12 +14,12 @@ import java.io.File;
 public class CheckerPanel extends JPanel{
     private BufferedImage img = new BufferedImage(85, 85, BufferedImage.TYPE_INT_ARGB);
     //private BufferedImage lightPiece = new BufferedImage(85, 85, BufferedImage.TYPE_INT_ARGB);//ImageIO.read(new File("res/Rebel.jpeg"));
-    private Image darkPiece = new ImageIcon("res/Imperial.jpeg").getImage();
+    private Image darkPiece;
     private ImageIcon lightP = new ImageIcon("res/Rebel.jpeg");
     private Image lightPiece = new ImageIcon("res/Rebel.jpeg").getImage();
     private Graphics g = img.createGraphics();
-    private int x = darkPiece.getWidth(null)/2;
-    private int y = darkPiece.getHeight(null)/2;
+    private int x = 0;
+    private int y = 0;
 
     public CheckerPanel(Color c, int row, boolean paint){
         //super();
@@ -29,17 +29,20 @@ public class CheckerPanel extends JPanel{
         //     System.out.println(row);
         //     paintComponet(g, row);
         // }
-         //paintComponent(g);
+        darkPiece = new ImageIcon("res/Imperial.jpeg").getImage();
+        x = darkPiece.getWidth(null)/2;
+        y = darkPiece.getHeight(null)/2;
+
     }
 
     public  void paintComponet(Graphics g){
         super.paintComponent(g);
-        this.setBackground(Color.WHITE);
+        //this.setBackground(Color.WHITE);
 
-        g.setColor(Color.CYAN);
-        g.drawOval(50, 50, 25, 25);
-            //g.drawImage(darkPiece, x, y, null);
-        lightP.paintIcon(this, g, x, y);
+        //g.setColor(Color.CYAN);
+        //g.drawOval(50, 50, 25, 25);
+            g.drawImage(darkPiece, x, y, null);
+        //lightP.paintIcon(this, g, x, y);
             //g.drawImage(lightPiece, x, y, null);
         
     }
