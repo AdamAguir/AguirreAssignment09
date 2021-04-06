@@ -12,38 +12,35 @@ import java.io.File;
 
 
 public class CheckerPanel extends JPanel{
-    private BufferedImage img = new BufferedImage(85, 85, BufferedImage.TYPE_INT_ARGB);
-    //private BufferedImage lightPiece = new BufferedImage(85, 85, BufferedImage.TYPE_INT_ARGB);//ImageIO.read(new File("res/Rebel.jpeg"));
-    private Image darkPiece;
-    private ImageIcon lightP = new ImageIcon("res/Rebel.jpeg");
+    private Image darkPiece = new ImageIcon("res/Imperial.jpeg").getImage();
     private Image lightPiece = new ImageIcon("res/Rebel.jpeg").getImage();
-    private Graphics g = img.createGraphics();
-    private int x = 0;
-    private int y = 0;
+    private Image img;
+   
 
-    public CheckerPanel(Color c, int row, boolean paint){
-        //super();
+    public CheckerPanel(Color c, int row, boolean p){
         setBackground(c);
-        setPreferredSize(new Dimension(100, 100));
-        // if (paint) {
-        //     System.out.println(row);
-        //     paintComponet(g, row);
-        // }
-        darkPiece = new ImageIcon("res/Imperial.jpeg").getImage();
-        x = darkPiece.getWidth(null)/2;
-        y = darkPiece.getHeight(null)/2;
-
+		setPreferredSize(new Dimension(100, 100));	
+		if (p) {
+			if(row < 3){
+				img = darkPiece;		
+			}
+			if (row > 4) {
+				img = lightPiece;		
+			}
+		} else {
+			img = null;
+		}
     }
 
-    public  void paintComponet(Graphics g){
-        super.paintComponent(g);
-        //this.setBackground(Color.WHITE);
-
-        //g.setColor(Color.CYAN);
-        //g.drawOval(50, 50, 25, 25);
-            g.drawImage(darkPiece, x, y, null);
-        //lightP.paintIcon(this, g, x, y);
-            //g.drawImage(lightPiece, x, y, null);
-        
-    }
+    public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		
+		int w = getWidth();
+		int h = getHeight();
+		// need to find the center of the screen by subtracting half the image w/h from screen w/h
+		if (img != null){
+			g.drawImage(img, w / 2 - (img.getWidth(null) / 2), h / 2 - (img.getHeight(null) / 2), null);
+		}
+}
 }

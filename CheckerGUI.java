@@ -1,43 +1,26 @@
-<<<<<<< HEAD
-public class CheckerGUI{
-
-}
-=======
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.EventQueue;
-
-
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.Image;
 
-
 public class CheckerGUI extends JFrame{
-    
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> 
-		{
-            JFrame frame = new JFrame("Checker Board");
-            frame.setSize(800,800);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    public CheckerGUI(){
+            setTitle("Checker Board");
+            setUndecorated(false);
             Image icon = new ImageIcon("res/Jedi_Order.JPG").getImage();
-            frame.setIconImage(icon);
-
-            Color light = new Color(130,12,12);
-            Color dark = new Color(0,0,0);
-
-            Container pane = frame.getContentPane();
+            setIconImage(icon);            
+            
+            Container pane = getContentPane();
+            
             GridLayout grid = new GridLayout(8,8);
             pane.setLayout(grid); // Need to set layout to add multiple Jpanels using GridLayout for the checkerboard
+            Color light = new Color(130,12,12);
+            Color dark = new Color(0,0,0);
             
-            
-
-            // make the CheckerPanels
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (i % 2 == 0) {
@@ -45,7 +28,7 @@ public class CheckerGUI extends JFrame{
                         pane.add(new CheckerPanel(light, i, false));
                         } else {
                         pane.add(new CheckerPanel(dark, i, true));
-
+    
                         }
                     } else {
                         if (j % 2 == 0) {
@@ -56,11 +39,18 @@ public class CheckerGUI extends JFrame{
                     }
                 }
             }
-            // Pack the checker panels into the frame
-            frame.pack();
-            frame.setVisible(true);
-
-        });
+            pack();  // use this when using preferredSize in a component
+    }
+    public static void main(String[] args) {
+		
+		
+		EventQueue.invokeLater(() -> 
+		{
+            CheckerGUI frame = new CheckerGUI();
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+			
+			frame.setVisible(true); // always last
+		});
     }
 }
->>>>>>> f5b5d8ceecc1c5d79328028af27d5d6e6497ff4b
+
